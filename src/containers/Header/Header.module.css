@@ -1,0 +1,36 @@
+.Header{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    background-color: rgb(39, 38, 38);
+}
+
+@media(max-width: 600px) {
+    .Header{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 7rem;
+    }
+
+    .Button{
+        margin: .5rem .5rem 1rem .5rem;
+    }
+
+    .Search{
+        margin-left: .5rem;
+    }
+  }
+.Search{
+    padding-left: 0.5rem;
+    background-color: rgb(39, 38, 38);
+}
+
+.Button{
+    padding-left: 0.5rem;
+    margin-right: 0.5rem; 
+    background-color: rgb(39, 38, 38);
+}

@@ -1,0 +1,13 @@
+.TextField{
+    width: 20rem;
+    color: white;
+}
+
+.TextField::placeholder{
+    color: white;
+}
+
+.InputAdornment{
+    color: white;
+}
+

@@ -5,7 +5,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const HeaderButton = props=>(
     <Button
-        className={styles.Button}
         style={{backgroundColor: 'white'}}
         onClick={props.clicked}
         startIcon={<AccountCircleIcon />}

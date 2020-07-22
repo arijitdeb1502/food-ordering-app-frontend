@@ -1,6 +1,5 @@
 .Header{
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -31,7 +30,6 @@
 
 .Button{
     padding-left: 0.5rem;
-    margin-right: 0.5rem; 
-    background-color: rgb(39, 38, 38);
+    margin-right: 0.5rem;
 }
 

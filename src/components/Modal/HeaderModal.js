@@ -18,7 +18,6 @@ const HeaderModal=props=>{
     return (
             <Modal
                 isOpen={props.modalIsOpen}
-                // onAfterOpen={afterOpenModal}
                 ariaHideApp={false}
                 onRequestClose={props.closeModal}
                 style={customStyles}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 
 const FormContainer = props =>(
     <Typography 
@@ -13,5 +14,9 @@ const FormContainer = props =>(
       {props.children}
     </Typography>
 )
+
+FormContainer.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
 export default FormContainer;

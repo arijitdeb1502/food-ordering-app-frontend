@@ -6,6 +6,7 @@ import InputWithIcon from '../../components/Header/ui/Filter/Filter';
 import HeaderButton from '../../components/Header/ui/Button/Button';
 import HeaderModal from '../../components/Header/Modal/HeaderModal';
 import LoginForm from '../Header/Forms/LoginForm/LoginForm';
+import SignUpForm from '../Header/Forms/SignupForm/SignupForm';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -57,7 +58,7 @@ class Header extends Component{
                         <Tab label="Login" />
                         <Tab label="Sign Up" />
                     </Tabs>
-                    <LoginForm></LoginForm>
+                    {this.state.tabIndex===0?<LoginForm />:<SignUpForm/>}
                   </HeaderModal>
                 {/* </StylesProvider> */}
             </Aux>

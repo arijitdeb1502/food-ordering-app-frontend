@@ -24,7 +24,12 @@ class Header extends Component{
     }
 
     closeModalHandler=()=>{
-        this.setState({displayModal:false})
+        this.setState(
+                       {
+                         displayModal:false,
+                         tabIndex:0
+                       }
+                      )
     }
 
     tabChangeHandler=(event,index)=>{
@@ -58,7 +63,8 @@ class Header extends Component{
                         <Tab label="Login" />
                         <Tab label="Sign Up" />
                     </Tabs>
-                    {this.state.tabIndex===0?<LoginForm />:<SignUpForm/>}
+                    {this.state.tabIndex===0 && <LoginForm />}
+                    {this.state.tabIndex===1 && <SignUpForm/>}
                   </HeaderModal>
                 {/* </StylesProvider> */}
             </Aux>

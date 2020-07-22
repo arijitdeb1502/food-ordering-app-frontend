@@ -30,12 +30,14 @@ class LoginForm extends Component{
 
     formButtonClickHandler=()=>{
 
-        this.state.userName.trim().length===0?this.setState({formUserNameIsValid:false}):
-                                              this.setState({formUserNameIsValid:true});
+        this.state.userName.trim().length
+               ===0?this.setState({formUserNameIsValid:false}):
+                    this.setState({formUserNameIsValid:true});
 
 
-        this.state.password.trim().length===0?this.setState({formPasswordIsValid:false}):
-                                              this.setState({formPasswordIsValid:true});
+        this.state.password.trim().length
+               ===0?this.setState({formPasswordIsValid:false}):
+                    this.setState({formPasswordIsValid:true});
 
     }
 
@@ -47,7 +49,7 @@ class LoginForm extends Component{
                     <Input 
                         id="userName"
                         type="text"
-                        password={this.state.userName}
+                        userName={this.state.userName}
                         onChange={this.userNameChangeHandler} 
                     />
                     {!this.state.formUserNameIsValid &&

@@ -1,10 +1,12 @@
 .TextField{
     width: 20rem;
     color: white;
+    margin-bottom: auto;
 }
 
-.TextField::placeholder{
-    color: white;
+::placeholder{
+    background-color: grey;
+    opacity: 1;
 }
 
 .InputAdornment{

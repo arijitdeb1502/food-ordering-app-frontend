@@ -4,7 +4,8 @@ import Aux from '../../hoc/Aux';
 import ColoredFastFoodIcon from '../../components/Header/ui/icon/FastFoodIcon';
 import InputWithIcon from '../../components/Header/ui/Filter/Filter';
 import HeaderButton from '../../components/Header/ui/Button/Button';
-import HeaderModal from '../../components/Modal/HeaderModal';
+import HeaderModal from '../../components/Header/Modal/HeaderModal';
+import LoginForm from '../Header/Forms/LoginForm/LoginForm';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -48,13 +49,15 @@ class Header extends Component{
                     closeModal={this.closeModalHandler}
                     modalStyle={styles.Modal}
                   >
-                    <Tabs 
+                    <Tabs
+                        className={styles.Tabs} 
                         value={this.state.tabIndex} 
                         onChange={this.tabChangeHandler}
                     >
                         <Tab label="Login" />
                         <Tab label="Sign Up" />
                     </Tabs>
+                    <LoginForm></LoginForm>
                   </HeaderModal>
                 {/* </StylesProvider> */}
             </Aux>

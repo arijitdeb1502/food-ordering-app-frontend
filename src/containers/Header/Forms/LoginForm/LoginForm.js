@@ -30,26 +30,30 @@ class LoginForm extends Component{
 
     formButtonClickHandler=()=>{
 
+        this.isFormFieldsEmpty();
+
+    }
+
+    isFormFieldsEmpty=()=>{
         this.state.userName.trim().length
-               ===0?this.setState({formUserNameIsValid:false}):
-                    this.setState({formUserNameIsValid:true});
+        ===0?this.setState({formUserNameIsValid:false}):
+             this.setState({formUserNameIsValid:true});
 
 
         this.state.password.trim().length
-               ===0?this.setState({formPasswordIsValid:false}):
-                    this.setState({formPasswordIsValid:true});
-
+        ===0?this.setState({formPasswordIsValid:false}):
+             this.setState({formPasswordIsValid:true});
     }
 
     render(){
         return(
             <FormContainer>
                 <FormControl style={{marginBottom: '1rem'}}>
-                    <InputLabel htmlFor="userName">User name:</InputLabel>
+                    <InputLabel htmlFor="userName">Contact Number:</InputLabel>
                     <Input 
                         id="userName"
                         type="text"
-                        userName={this.state.userName}
+                        value={this.state.userName}
                         onChange={this.userNameChangeHandler} 
                     />
                     {!this.state.formUserNameIsValid &&
@@ -65,7 +69,7 @@ class LoginForm extends Component{
                     <Input 
                         id="password" 
                         type="password"
-                        password={this.state.password}
+                        value={this.state.password}
                         onChange={this.passwordChangeHandler} 
                     />
                     {!this.state.formPasswordIsValid &&

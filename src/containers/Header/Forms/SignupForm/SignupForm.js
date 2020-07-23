@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 
+import validator from 'validator';
+import passwordValidator from 'password-validator';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
@@ -16,10 +18,12 @@ class SignupForm extends Component{
         password:'',
         contactNumber:'',
         formFirstNameIsValid: true,
-        formLastNameIsValid: true,
         formEmailIsValid: true,
         formPasswordIsValid: true,
-        formContactNumberIsValid: true
+        formContactNumberIsValid: true,
+        emailValueIsValid:true,
+        passwordValueIsValid:true,
+        contactNumberValueIsValid:true
     }
 
     firstNameChangeHandler=e=>{
@@ -54,26 +58,59 @@ class SignupForm extends Component{
 
     formButtonClickHandler=()=>{
 
+        this.checkAndDisplayEmptyFieldMessage();
+
+        !this.isEmailValid()?this.setState({emailValueIsValid: false})
+                            :this.setState({emailValueIsValid: true});
+
+        !this.isPasswordValid()?this.setState({passwordValueIsValid: false})
+                               :this.setState({passwordValueIsValid: true}); 
+
+        !this.isContactNumberValid()?this.setState({contactNumberValueIsValid: false})
+                                    :this.setState({contactNumberValueIsValid: true})
+        
+    }
+
+    isEmailValid=()=>{
+        const emailVal=this.state.email;
+        return validator.isEmail(emailVal);
+    }
+
+    isPasswordValid=()=>{
+        const schema = new passwordValidator();
+        const regex = /[#@$%&*!^]/g;
+
+        schema
+        .is().min(8)
+        .has().digits()
+        .has().uppercase()
+        .has(regex)
+
+        return schema.validate(this.state.password);
+    }
+
+    isContactNumberValid=()=>{
+        const pattern=/\d{10}/;
+        return pattern.test(this.state.contactNumber);
+    }
+
+    checkAndDisplayEmptyFieldMessage=()=>{
         this.state.firstName.trim().length
-               ===0?this.setState({formFirstNameIsValid:false}):
-                    this.setState({formFirstNameIsValid:true});
-
-
-        this.state.lastName.trim().length
-               ===0?this.setState({formLastNameIsValid:false}):
-                    this.setState({formLastNameIsValid:true});
+        ===0?this.setState({formFirstNameIsValid:false}):
+             this.setState({formFirstNameIsValid:true});
 
         this.state.email.trim().length
-               ===0?this.setState({formEmailIsValid:false}):
-                    this.setState({formEmailIsValid:true});
+        ===0?this.setState({formEmailIsValid:false}):
+             this.setState({formEmailIsValid:true});
 
         this.state.password.trim().length
-               ===0?this.setState({formPasswordIsValid:false}):
-                    this.setState({formPasswordIsValid:true});
+        ===0?this.setState({formPasswordIsValid:false}):
+             this.setState({formPasswordIsValid:true});
 
         this.state.contactNumber.trim().length
-               ===0?this.setState({formContactNumberIsValid:false}):
-                    this.setState({formContactNumberIsValid:true});
+        ===0?this.setState({formContactNumberIsValid:false}):
+             this.setState({formContactNumberIsValid:true});
+
     }
 
     render(){
@@ -84,7 +121,7 @@ class SignupForm extends Component{
                     <Input 
                         id="firstName"
                         type="text"
-                        firstName={this.state.firstName}
+                        value={this.state.firstName}
                         onChange={this.firstNameChangeHandler}  
                     />
                     {!this.state.formFirstNameIsValid &&
@@ -100,23 +137,16 @@ class SignupForm extends Component{
                     <Input 
                         id="lastName"
                         type="text"
-                        firstName={this.state.lastName}
+                        value={this.state.lastName}
                         onChange={this.lastNameChangeHandler}   
                     />
-                    {!this.state.formLastNameIsValid &&
-                        <FormHelperText
-                            error
-                        >
-                            *required
-                        </FormHelperText>
-                    }
                 </FormControl>
                 <FormControl style={{marginBottom: '1rem'}}>
                     <InputLabel htmlFor="email">Email:</InputLabel>
                     <Input 
                         id="email"
                         type="text"
-                        firstName={this.state.email}
+                        value={this.state.email}
                         onChange={this.emailChangeHandler} 
                     />
                     {!this.state.formEmailIsValid &&
@@ -126,13 +156,22 @@ class SignupForm extends Component{
                             *required
                         </FormHelperText>
                     }
+                    { this.state.formEmailIsValid &&
+                      !this.state.emailValueIsValid 
+                       &&
+                        <FormHelperText
+                            error
+                        >
+                            Invalid Email!
+                        </FormHelperText>
+                    }
                 </FormControl>
                 <FormControl style={{marginBottom: '1rem'}}>
                     <InputLabel htmlFor="password">Password:</InputLabel>
                     <Input 
                         id="password"
                         type="password"
-                        firstName={this.state.password}
+                        value={this.state.password}
                         onChange={this.passwordChangeHandler} 
                     />
                     {!this.state.formPasswordIsValid &&
@@ -142,15 +181,40 @@ class SignupForm extends Component{
                             *required
                         </FormHelperText>
                     }
+                    { this.state.formPasswordIsValid&&
+                     !this.state.passwordValueIsValid 
+                      &&
+                        <FormHelperText
+                            error
+                        >
+                            Password must contain at least one capital letter, one 
+                            <br/> small letter, one number, and one special character
+                        </FormHelperText>
+                    }
                 </FormControl>
                 <FormControl style={{marginBottom: '1rem'}}>
                     <InputLabel htmlFor="contactNumber">Contact No:</InputLabel>
-                    <Input id="contactNumber" />
+                    <Input 
+                        id="contactNumber"
+                        type="text"
+                        value={this.state.contactNumber}
+                        onChange={this.contactNumberChangeHandler} 
+                    />
                     {!this.state.formContactNumberIsValid &&
                         <FormHelperText
                             error
                         >
                             *required
+                        </FormHelperText>
+                    }
+                    { this.state.formContactNumberIsValid &&
+                      !this.state.contactNumberValueIsValid 
+                       &&
+                        <FormHelperText
+                            error
+                        >
+                            Contact Number must consist of numbers<br/> 
+                            and must be of 10 digits
                         </FormHelperText>
                     }
                 </FormControl>

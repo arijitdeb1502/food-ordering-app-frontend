@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+
+import {isContactNumberValid} from '../utilityMethods';
 import FormContainer from '../../../../components/Header/FormContainer/FormContainer';
 import FormButton from '../../../../components/Header/Forms/ui/Button/FormButton';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -13,7 +15,8 @@ class LoginForm extends Component{
         userName: '',
         password: '',
         formUserNameIsValid: true,
-        formPasswordIsValid: true
+        formPasswordIsValid: true,
+        contactNumberValueIsValid: true
     }
 
     userNameChangeHandler=e=>{
@@ -30,11 +33,15 @@ class LoginForm extends Component{
 
     formButtonClickHandler=()=>{
 
-        this.isFormFieldsEmpty();
+        this.checkAndDisplayEmptyFieldMessage();
+
+        const contactNumberVal=this.state.userName;
+        isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
+                                              :this.setState({contactNumberValueIsValid: false})
 
     }
 
-    isFormFieldsEmpty=()=>{
+    checkAndDisplayEmptyFieldMessage=()=>{
         this.state.userName.trim().length
         ===0?this.setState({formUserNameIsValid:false}):
              this.setState({formUserNameIsValid:true});
@@ -61,6 +68,16 @@ class LoginForm extends Component{
                             error
                         >
                             *required
+                        </FormHelperText>
+                    }
+                    { this.state.formUserNameIsValid &&
+                      !this.state.contactNumberValueIsValid 
+                       &&
+                        <FormHelperText
+                            error
+                        >
+                            Contact Number must consist of numbers<br/> 
+                            and must be of 10 digits
                         </FormHelperText>
                     }
                 </FormControl>

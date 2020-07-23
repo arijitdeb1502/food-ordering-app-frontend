@@ -1,11 +1,17 @@
 import React,{Component} from 'react';
 
-import validator from 'validator';
-import passwordValidator from 'password-validator';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
+
+import {
+        isEmailValid,
+        isPasswordValid,
+        isContactNumberValid
+       }
+from '../utilityMethods';
+
 import FormContainer from '../../../../components/Header/FormContainer/FormContainer';
 import FormButton from '../../../../components/Header/Forms/ui/Button/FormButton';
 
@@ -60,39 +66,21 @@ class SignupForm extends Component{
 
         this.checkAndDisplayEmptyFieldMessage();
 
-        !this.isEmailValid()?this.setState({emailValueIsValid: false})
-                            :this.setState({emailValueIsValid: true});
+        const emailVal=this.state.email;
+        isEmailValid(emailVal)?this.setState({emailValueIsValid: true})
+                              :this.setState({emailValueIsValid: false});
 
-        !this.isPasswordValid()?this.setState({passwordValueIsValid: false})
-                               :this.setState({passwordValueIsValid: true}); 
+        const passwordVal=this.state.password;
+        isPasswordValid(passwordVal)?this.setState({passwordValueIsValid: true})
+                                    :this.setState({passwordValueIsValid: false}); 
 
-        !this.isContactNumberValid()?this.setState({contactNumberValueIsValid: false})
-                                    :this.setState({contactNumberValueIsValid: true})
+        const contactNumberVal=this.state.contactNumber;
+        isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
+                                              :this.setState({contactNumberValueIsValid: false})
         
     }
 
-    isEmailValid=()=>{
-        const emailVal=this.state.email;
-        return validator.isEmail(emailVal);
-    }
-
-    isPasswordValid=()=>{
-        const schema = new passwordValidator();
-        const regex = /[#@$%&*!^]/g;
-
-        schema
-        .is().min(8)
-        .has().digits()
-        .has().uppercase()
-        .has(regex)
-
-        return schema.validate(this.state.password);
-    }
-
-    isContactNumberValid=()=>{
-        const pattern=/\d{10}/;
-        return pattern.test(this.state.contactNumber);
-    }
+    
 
     checkAndDisplayEmptyFieldMessage=()=>{
         this.state.firstName.trim().length

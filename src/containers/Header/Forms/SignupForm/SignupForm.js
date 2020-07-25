@@ -107,21 +107,23 @@ class SignupForm extends Component{
         firstName,
         lastName,
         email,
-        contactNumber,
-        password
+        password,
+        contactNumber
     )=>{
 
         const custSignupData = {
             first_name: firstName,
             last_name: lastName,
             email_address: email,
+            password: password,
             contact_number: contactNumber,
-            password: password
         }
 
-        axios.post('/posts', data)
+        axios.post('/api/customer/signup', custSignupData)
             .then(response => {
                 console.log(response);
+            }).catch(error=>{
+                console.log(error);
             });
     
     }

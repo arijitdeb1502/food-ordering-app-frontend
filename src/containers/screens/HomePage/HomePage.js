@@ -7,7 +7,7 @@ import styles from './HomePage.module.css';
 class HomePage extends Component{
     
     state={
-        showSnackBar: true
+        showSnackBar: false
     }
 
     render(){

@@ -7,15 +7,17 @@ import styles from './HomePage.module.css';
 class HomePage extends Component{
     
     state={
-        showSnackBar: false
+        showSnackBar: true
     }
 
     render(){
         return(
             <Aux>
                 HomePage
-                <SnackBar>
-                    
+                <SnackBar
+                   show={this.state.showSnackBar}
+                >
+                   User successfully logged in 
                 </SnackBar>
             </Aux>
         )

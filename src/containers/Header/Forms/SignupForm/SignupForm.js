@@ -5,6 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+import axios from 'axios';
+
 import {
         isEmailValid,
         isPasswordValid,
@@ -78,9 +80,51 @@ class SignupForm extends Component{
         isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
                                               :this.setState({contactNumberValueIsValid: false})
         
+    
+        const validCustomerSignupRequest = this.state.formFirstNameIsValid&&
+                                           this.state.formEmailIsValid&&
+                                           this.state.formPasswordIsValid&&
+                                           this.state.formContactNumberIsValid&&
+                                           this.state.emailValueIsValid&&
+                                           this.state.passwordValueIsValid&&
+                                           this.state.contactNumberValueIsValid;
+
+        if(validCustomerSignupRequest===true){
+            
+            this.sendCustomerSignup(
+                                this.state.firstName,
+                                this.state.lastName,
+                                this.state.email,
+                                this.state.password,
+                                this.state.contactNumber
+                              );
+            }
+        
+    
     }
 
+    sendCustomerSignup=(
+        firstName,
+        lastName,
+        email,
+        contactNumber,
+        password
+    )=>{
+
+        const custSignupData = {
+            first_name: firstName,
+            last_name: lastName,
+            email_address: email,
+            contact_number: contactNumber,
+            password: password
+        }
+
+        axios.post('/posts', data)
+            .then(response => {
+                console.log(response);
+            });
     
+    }
 
     checkAndDisplayEmptyFieldMessage=()=>{
         this.state.firstName.trim().length

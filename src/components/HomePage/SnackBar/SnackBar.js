@@ -10,10 +10,10 @@ const Alert=props=>{
 const SnackBar=props=>(
     <Aux>
       {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}> */}
-      <Snackbar open autoHideDuration={6000}>
+      <Snackbar open={props.show} autoHideDuration={6}>
         {/* <Alert onClose={handleClose} severity="success"> */}
         <Alert severity="success">
-          This is a success message!
+          {props.children}
         </Alert>
       </Snackbar>
     </Aux>

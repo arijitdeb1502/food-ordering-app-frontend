@@ -31,7 +31,8 @@ class SignupForm extends Component{
         formContactNumberIsValid: true,
         emailValueIsValid:true,
         passwordValueIsValid:true,
-        contactNumberValueIsValid:true
+        contactNumberValueIsValid:true,
+        duplicateContactNo:false
     }
 
     firstNameChangeHandler=e=>{
@@ -66,6 +67,8 @@ class SignupForm extends Component{
 
     formButtonClickHandler=()=>{
 
+
+        this.setState({duplicateContactNo:false});
         this.checkAndDisplayEmptyFieldMessage();
 
         const emailVal=this.state.email;
@@ -123,7 +126,14 @@ class SignupForm extends Component{
             .then(response => {
                 console.log(response);
             }).catch(error=>{
-                console.log(error);
+                // const errorObj={...error};
+                // console.log(errorObj.response.status+":"+errorObj.response.data.error);
+                if(error.includes("This contact number is already registered")){
+                    this.setState({duplicateContactNo:true});
+                }else{
+                    this.setState({duplicateContactNo:false});
+                }
+                                            
             });
     
     }
@@ -249,6 +259,17 @@ class SignupForm extends Component{
                         >
                             Contact Number must consist of numbers<br/> 
                             and must be of 10 digits
+                        </FormHelperText>
+                    }
+                    { this.state.formContactNumberIsValid &&
+                      this.state.contactNumberValueIsValid &&
+                      this.state.duplicateContactNo 
+                       &&
+                        <FormHelperText
+                            error
+                        >
+                            This Contact Number is already registered!Try other<br/> 
+                            Contact Number
                         </FormHelperText>
                     }
                 </FormControl>

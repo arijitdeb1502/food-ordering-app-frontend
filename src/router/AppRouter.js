@@ -3,9 +3,9 @@ import React from 'react';
 import { 
             BrowserRouter, 
             Route, 
-            Switch, 
-            Link, 
-            NavLink 
+            Switch
+            // Link, 
+            // NavLink 
         } from 'react-router-dom';
 
 import Aux from '../hoc/Aux';

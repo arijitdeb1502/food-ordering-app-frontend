@@ -10,13 +10,20 @@ import SignUpForm from '../Header/Forms/SignupForm/SignupForm';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import {connect} from 'react-redux';
+
+import {
+         modalClose,
+         tabChange
+        } 
+from '../../store/actions/Signup';
+
 import styles from './Header.module.css';
 
 
 class Header extends Component{
     state ={
-        displayModal: false,
-        tabIndex: 0
+        displayModal: false
     }
 
     modalOpenHandler=()=>{
@@ -24,20 +31,23 @@ class Header extends Component{
     }
 
     closeModalHandler=()=>{
+    
         this.setState(
                        {
-                         displayModal:false,
-                         tabIndex:0
+                         displayModal:false
                        }
                       )
+        
+        this.props.onCloseModal();
     }
 
     tabChangeHandler=(event,index)=>{
-        this.setState({tabIndex:index});
+        // this.setState({tabIndex:index});
+        this.props.onChangeTab(index);
     }
 
     render(){
-        
+        console.log(this.props.tabIndex);
         return(
             <Aux>
                 <div className={styles.Header}>
@@ -49,7 +59,6 @@ class Header extends Component{
                         <HeaderButton clicked={this.modalOpenHandler}>Login</HeaderButton>
                     </div>
                 </div>
-                {/* <StylesProvider injectFirst> */}
                   <HeaderModal 
                     modalIsOpen={this.state.displayModal}
                     closeModal={this.closeModalHandler}
@@ -57,19 +66,31 @@ class Header extends Component{
                   >
                     <Tabs
                         className={styles.Tabs} 
-                        value={this.state.tabIndex} 
+                        value={this.props.tabIndex} 
                         onChange={this.tabChangeHandler}
                     >
                         <Tab label="Login" />
                         <Tab label="Sign Up" />
                     </Tabs>
-                    {this.state.tabIndex===0 && <LoginForm />}
-                    {this.state.tabIndex===1 && <SignUpForm/>}
+                    {this.props.tabIndex===0 && <LoginForm />}
+                    {this.props.tabIndex===1 && <SignUpForm/>}
                   </HeaderModal>
-                {/* </StylesProvider> */}
             </Aux>
         )
     }
 }
 
-export default Header;
+const mapStateToProps = state=>{
+    return{
+        tabIndex: state.signup.tabIndex
+    }
+}
+
+const mapDispatchToProps = dispatch=>{
+    return{
+        onCloseModal:()=>dispatch(modalClose()),
+        onChangeTab:(index)=>dispatch(tabChange(index))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

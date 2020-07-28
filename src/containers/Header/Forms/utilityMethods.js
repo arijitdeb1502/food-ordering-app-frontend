@@ -19,6 +19,6 @@ export const isPasswordValid=(passwordVal)=>{
 }
 
 export const isContactNumberValid=(contactNumberVal)=>{
-    const pattern=/\d{10}/;
+    const pattern=/^\d{10}$/;
     return pattern.test(contactNumberVal);
 }

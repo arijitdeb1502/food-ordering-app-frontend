@@ -1,9 +1,13 @@
 import React,{Component} from 'react';
+import {connect} from 'react-redux';
+
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
+
+import {signup} from '../../../../store/actions/Signup';
 
 import axios from 'axios';
 
@@ -125,9 +129,10 @@ class SignupForm extends Component{
         axios.post('/api/customer/signup', custSignupData)
             .then(response => {
                 console.log(response);
+                this.props.onSignup();
+
             }).catch(error=>{
-                // const errorObj={...error};
-                // console.log(errorObj.response.status+":"+errorObj.response.data.error);
+            
                 if(error.includes("This contact number is already registered")){
                     this.setState({duplicateContactNo:true});
                 }else{
@@ -279,4 +284,11 @@ class SignupForm extends Component{
     }
 }
 
-export default SignupForm;
+const mapDispatchToProps= dispatch=>{
+    return {
+        onSignup: ()=>dispatch(signup("Registered Successfully! Please login now!"))
+    };
+}
+
+
+export default connect(null,mapDispatchToProps)(SignupForm);

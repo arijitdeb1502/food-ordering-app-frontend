@@ -87,25 +87,30 @@ class SignupForm extends Component{
         isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
                                               :this.setState({contactNumberValueIsValid: false})
         
-    
         const validCustomerSignupRequest = this.state.formFirstNameIsValid&&
                                            this.state.formEmailIsValid&&
                                            this.state.formPasswordIsValid&&
                                            this.state.formContactNumberIsValid&&
-                                           this.state.emailValueIsValid&&
-                                           this.state.passwordValueIsValid&&
-                                           this.state.contactNumberValueIsValid;
+                                           this.state.duplicateContactNo&&
+                                           !this.state.emailValueIsValid&&
+                                           !this.state.passwordValueIsValid&&
+                                           !this.state.contactNumberValueIsValid;
 
-        if(validCustomerSignupRequest===true){
-            
+        validCustomerSignupRequest===true?
             this.sendCustomerSignup(
-                                this.state.firstName,
-                                this.state.lastName,
-                                this.state.email,
-                                this.state.password,
-                                this.state.contactNumber
-                              );
-            }
+                this.state.firstName,
+                this.state.lastName,
+                this.state.email,
+                this.state.password,
+                this.state.contactNumber
+            ):
+            this.setState({
+                    firstName:'',
+                    lastName:'',
+                    email:'',
+                    password:'',
+                    contactNumber:''
+            })
         
     
     }

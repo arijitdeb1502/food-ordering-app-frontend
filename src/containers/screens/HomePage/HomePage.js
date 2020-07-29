@@ -11,7 +11,6 @@ import styles from './HomePage.module.css';
 class HomePage extends Component{
 
     closeSnackbarHandler=()=>{
-        console.log("Inside closeSnack Bar Handler");
         this.props.onCloseSnackbar();
     }
 
@@ -25,7 +24,6 @@ class HomePage extends Component{
                         horizontal: 'left',
                     }}
                     open={this.props.showSnackBar}
-                    autoHideDuration={6000}
                     onClose={this.closeSnackbarHandler}
                     message={this.props.displaySignupSuccessMsg}
                 />

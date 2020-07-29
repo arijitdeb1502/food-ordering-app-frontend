@@ -88,14 +88,6 @@ class SignupForm extends Component{
         isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
                                               :this.setState({contactNumberValueIsValid: false})
         
-        // const validCustomerSignupRequest = !this.state.formFirstNameIsValid&&
-        //                                    !this.state.formEmailIsValid&&
-        //                                    !this.state.formPasswordIsValid&&
-        //                                    !this.state.formContactNumberIsValid&&
-        //                                    !this.state.emailValueIsValid&&
-        //                                    !this.state.passwordValueIsValid&&
-        //                                    !this.state.contactNumberValueIsValid;
-
 
         const allRequiredFieldsEmpty=this.state.firstName.trim().length===0
                                       ||this.state.email.trim().length===0

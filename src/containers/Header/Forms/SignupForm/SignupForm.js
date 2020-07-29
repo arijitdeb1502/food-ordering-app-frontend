@@ -29,10 +29,10 @@ class SignupForm extends Component{
         email:'',
         password:'',
         contactNumber:'',
-        formFirstNameIsValid: true,
-        formEmailIsValid: true,
-        formPasswordIsValid: true,
-        formContactNumberIsValid: true,
+        formFirstNameIsEmpty: false,
+        formEmailIsEmpty: false,
+        formPasswordIsEmpty: false,
+        formContactNumberEmpty: false,
         emailValueIsValid:true,
         passwordValueIsValid:true,
         contactNumberValueIsValid:true,
@@ -75,6 +75,7 @@ class SignupForm extends Component{
         this.setState({duplicateContactNo:false});
         this.checkAndDisplayEmptyFieldMessage();
 
+
         const emailVal=this.state.email;
         isEmailValid(emailVal)?this.setState({emailValueIsValid: true})
                               :this.setState({emailValueIsValid: false});
@@ -87,30 +88,36 @@ class SignupForm extends Component{
         isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
                                               :this.setState({contactNumberValueIsValid: false})
         
-        const validCustomerSignupRequest = this.state.formFirstNameIsValid&&
-                                           this.state.formEmailIsValid&&
-                                           this.state.formPasswordIsValid&&
-                                           this.state.formContactNumberIsValid&&
-                                           this.state.duplicateContactNo&&
-                                           !this.state.emailValueIsValid&&
-                                           !this.state.passwordValueIsValid&&
-                                           !this.state.contactNumberValueIsValid;
+        // const validCustomerSignupRequest = !this.state.formFirstNameIsValid&&
+        //                                    !this.state.formEmailIsValid&&
+        //                                    !this.state.formPasswordIsValid&&
+        //                                    !this.state.formContactNumberIsValid&&
+        //                                    !this.state.emailValueIsValid&&
+        //                                    !this.state.passwordValueIsValid&&
+        //                                    !this.state.contactNumberValueIsValid;
 
-        validCustomerSignupRequest===true?
-            this.sendCustomerSignup(
-                this.state.firstName,
-                this.state.lastName,
-                this.state.email,
-                this.state.password,
-                this.state.contactNumber
-            ):
-            this.setState({
-                    firstName:'',
-                    lastName:'',
-                    email:'',
-                    password:'',
-                    contactNumber:''
-            })
+
+        const allRequiredFieldsEmpty=this.state.firstName.trim().length===0
+                                      ||this.state.email.trim().length===0
+                                      ||this.state.password.trim().length===0
+                                      ||this.state.contactNumber.trim().length===0
+
+        console.log(allRequiredFieldsEmpty+"Arijit")
+        // validCustomerSignupRequest===true?
+        //     this.sendCustomerSignup(
+        //         this.state.firstName,
+        //         this.state.lastName,
+        //         this.state.email,
+        //         this.state.password,
+        //         this.state.contactNumber
+        //     ):
+        //     this.setState({
+        //             firstName:'',
+        //             lastName:'',
+        //             email:'',
+        //             password:'',
+        //             contactNumber:''
+        //     })
         
     
     }
@@ -150,20 +157,20 @@ class SignupForm extends Component{
 
     checkAndDisplayEmptyFieldMessage=()=>{
         this.state.firstName.trim().length
-        ===0?this.setState({formFirstNameIsValid:false}):
-             this.setState({formFirstNameIsValid:true});
+        ===0?this.setState({formFirstNameIsEmpty:true}):
+             this.setState({formFirstNameIsEmpty:false});
 
         this.state.email.trim().length
-        ===0?this.setState({formEmailIsValid:false}):
-             this.setState({formEmailIsValid:true});
-
+        ===0?this.setState({formEmailIsEmpty:true}):
+             this.setState({formEmailIsEmpty:false});
+        
         this.state.password.trim().length
-        ===0?this.setState({formPasswordIsValid:false}):
-             this.setState({formPasswordIsValid:true});
+        ===0?this.setState({formPasswordIsEmpty:true}):
+             this.setState({formPasswordIsEmpty:false});
 
         this.state.contactNumber.trim().length
-        ===0?this.setState({formContactNumberIsValid:false}):
-             this.setState({formContactNumberIsValid:true});
+        ===0?this.setState({formContactNumberIsEmpty:true}):
+             this.setState({formContactNumberIsEmpty:false});
 
     }
 
@@ -178,7 +185,7 @@ class SignupForm extends Component{
                         value={this.state.firstName}
                         onChange={this.firstNameChangeHandler}  
                     />
-                    {!this.state.formFirstNameIsValid &&
+                    {this.state.formFirstNameIsEmpty &&
                         <FormHelperText
                             error
                         >
@@ -203,14 +210,14 @@ class SignupForm extends Component{
                         value={this.state.email}
                         onChange={this.emailChangeHandler} 
                     />
-                    {!this.state.formEmailIsValid &&
+                    {this.state.formEmailIsEmpty &&
                         <FormHelperText
                             error
                         >
                             *required
                         </FormHelperText>
                     }
-                    { this.state.formEmailIsValid &&
+                    { !this.state.formEmailIsEmpty &&
                       !this.state.emailValueIsValid 
                        &&
                         <FormHelperText
@@ -228,15 +235,15 @@ class SignupForm extends Component{
                         value={this.state.password}
                         onChange={this.passwordChangeHandler} 
                     />
-                    {!this.state.formPasswordIsValid &&
+                    {this.state.formPasswordIsEmpty &&
                         <FormHelperText
                             error
                         >
                             *required
                         </FormHelperText>
                     }
-                    { this.state.formPasswordIsValid&&
-                     !this.state.passwordValueIsValid 
+                    { !this.state.formPasswordIsEmpty&&
+                      !this.state.passwordValueIsValid 
                       &&
                         <FormHelperText
                             error
@@ -254,14 +261,14 @@ class SignupForm extends Component{
                         value={this.state.contactNumber}
                         onChange={this.contactNumberChangeHandler} 
                     />
-                    {!this.state.formContactNumberIsValid &&
+                    {this.state.formContactNumberIsEmpty &&
                         <FormHelperText
                             error
                         >
                             *required
                         </FormHelperText>
                     }
-                    { this.state.formContactNumberIsValid &&
+                    { !this.state.formContactNumberIsEmpty &&
                       !this.state.contactNumberValueIsValid 
                        &&
                         <FormHelperText
@@ -271,7 +278,7 @@ class SignupForm extends Component{
                             and must be of 10 digits
                         </FormHelperText>
                     }
-                    { this.state.formContactNumberIsValid &&
+                    { !this.state.formContactNumberIsEmpty &&
                       this.state.contactNumberValueIsValid &&
                       this.state.duplicateContactNo 
                        &&

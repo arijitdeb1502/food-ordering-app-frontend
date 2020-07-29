@@ -89,12 +89,12 @@ class SignupForm extends Component{
                                               :this.setState({contactNumberValueIsValid: false})
         
 
-        const allRequiredFieldsEmpty=this.state.firstName.trim().length===0
+        const isAnyRequiredFieldsEmpty=this.state.firstName.trim().length===0
                                       ||this.state.email.trim().length===0
                                       ||this.state.password.trim().length===0
                                       ||this.state.contactNumber.trim().length===0
 
-        console.log(allRequiredFieldsEmpty+"Arijit")
+        console.log(isAnyRequiredFieldsEmpty+"Arijit")
         // validCustomerSignupRequest===true?
         //     this.sendCustomerSignup(
         //         this.state.firstName,

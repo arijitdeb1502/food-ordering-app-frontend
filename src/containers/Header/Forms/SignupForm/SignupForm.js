@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import {signup} from '../../../../store/actions/Signup';
+import {signup} from '../../../../store/actions/Auth';
 
 import axios from 'axios';
 
@@ -96,11 +96,9 @@ class SignupForm extends Component{
         
         const anyFieldIsInvalid=!isEmailValid(emailVal)||
                                 !isPasswordValid(passwordVal)||
-                                !isContactNumberValid(contactNumberVal)
+                                !isContactNumberValid(contactNumberVal);
         
-        
-        console.log(anyRequiredFieldIsEmpty||anyFieldIsInvalid);
-        
+                
         (anyRequiredFieldIsEmpty||anyFieldIsInvalid)!==true?
             this.sendCustomerSignup(
                 this.state.firstName,

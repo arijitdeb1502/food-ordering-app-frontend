@@ -16,7 +16,7 @@ import {
          modalClose,
          tabChange
         } 
-from '../../store/actions/Signup';
+from '../../store/actions/Auth';
 
 import styles from './Header.module.css';
 

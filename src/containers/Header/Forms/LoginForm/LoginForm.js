@@ -37,7 +37,25 @@ class LoginForm extends Component{
 
         const contactNumberVal=this.state.userName;
         isContactNumberValid(contactNumberVal)?this.setState({contactNumberValueIsValid: true})
-                                              :this.setState({contactNumberValueIsValid: false})
+                                              :this.setState({contactNumberValueIsValid: false});
+
+        const anyRequiredFieldIsEmpty=this.state.userName.trim().length===0
+                                      ||this.state.password.trim().length===0;
+
+        const anyFieldIsInvalid=!isContactNumberValid(contactNumberVal);
+
+        if((anyRequiredFieldIsEmpty||anyFieldIsInvalid)!==true){
+            // console.log("Redux store should be updated!!");
+            const combinedUnamePass=this.state.userName+":"+this.state.password;
+
+            console.log(btoa(combinedUnamePass));
+
+        }else{
+            this.setState({
+                userName:'',
+                password:''
+            })
+        }
 
     }
 
@@ -76,8 +94,7 @@ class LoginForm extends Component{
                         <FormHelperText
                             error
                         >
-                            Contact Number must consist of numbers<br/> 
-                            and must be of 10 digits
+                            Invalid Contact Number!!
                         </FormHelperText>
                     }
                 </FormControl>

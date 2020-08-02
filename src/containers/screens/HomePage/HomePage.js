@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 
-import {closeSnackBar} from '../../../store/actions/Auth';
+import {closeSnackBar} from '../../../store/actions/Signup';
 
 import Aux from '../../../hoc/Aux';
 import Snackbar from '@material-ui/core/Snackbar';

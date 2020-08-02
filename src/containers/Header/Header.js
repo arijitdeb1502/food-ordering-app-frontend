@@ -16,7 +16,7 @@ import {
          modalClose,
          tabChange
         } 
-from '../../store/actions/Auth';
+from '../../store/actions/Signup';
 
 import styles from './Header.module.css';
 
@@ -47,7 +47,6 @@ class Header extends Component{
     }
 
     render(){
-        console.log(this.props.tabIndex);
         return(
             <Aux>
                 <div className={styles.Header}>

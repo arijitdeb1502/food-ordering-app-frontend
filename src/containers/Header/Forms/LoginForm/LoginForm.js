@@ -9,6 +9,10 @@ import FormContainer from '../../../../components/Header/FormContainer/FormConta
 import FormButton from '../../../../components/Header/Forms/ui/Button/FormButton';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+import {connect} from 'react-redux';
+import {login} from '../../../../store/actions/Login';
+
+
 class LoginForm extends Component{
     
     state={
@@ -45,10 +49,9 @@ class LoginForm extends Component{
         const anyFieldIsInvalid=!isContactNumberValid(contactNumberVal);
 
         if((anyRequiredFieldIsEmpty||anyFieldIsInvalid)!==true){
-            // console.log("Redux store should be updated!!");
             const combinedUnamePass=this.state.userName+":"+this.state.password;
 
-            console.log(btoa(combinedUnamePass));
+            this.props.onLoginFormSubmit(btoa(combinedUnamePass));
 
         }else{
             this.setState({
@@ -120,4 +123,10 @@ class LoginForm extends Component{
     }
 }
 
-export default LoginForm;
+const mapDispatchToProps=(dispatch=>{
+    return{
+        onLoginFormSubmit:( combinedUnamePass ) => dispatch( login( combinedUnamePass ) )
+    }
+})
+
+export default connect(null,mapDispatchToProps)(LoginForm);

@@ -6,7 +6,7 @@ export const signup=(state,action)=>{
 }
 
 export const modalClose=(state,action)=>{
-    return updateObject( state, { tabIndex: 0,userSignupSuccess:false} );
+    return updateObject( state, { tabIndex: 0,userSignupSuccess:false,showModal:false} );
 }
 
 export const tabChange=(state,action)=>{

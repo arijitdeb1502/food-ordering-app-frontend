@@ -18,25 +18,34 @@ import {
         } 
 from '../../store/actions/Signup';
 
+import {
+    modalOpen
+}
+from '../../store/actions/Header';
+
 import styles from './Header.module.css';
 
 
 class Header extends Component{
-    state ={
-        displayModal: false
-    }
+    // state ={
+    //     displayModal: this.props.showModal
+    // }
 
     modalOpenHandler=()=>{
-        this.setState({displayModal:true})
+        // this.setState({displayModal:this.props.showModal})
+        // this.setState({displayModal: true})
+
+        this.props.onOpenModal();
+    
     }
 
     closeModalHandler=()=>{
     
-        this.setState(
-                       {
-                         displayModal:false
-                       }
-                      )
+        // this.setState(
+        //                {
+        //                  displayModal:false
+        //                }
+        //               )
         
         this.props.onCloseModal();
     }
@@ -59,7 +68,8 @@ class Header extends Component{
                     </div>
                 </div>
                   <HeaderModal 
-                    modalIsOpen={this.state.displayModal}
+                    // modalIsOpen={this.props.showModal}
+                    modalIsOpen={this.props.displayModal}
                     closeModal={this.closeModalHandler}
                     modalStyle={styles.Modal}
                   >
@@ -81,13 +91,15 @@ class Header extends Component{
 
 const mapStateToProps = state=>{
     return{
-        tabIndex: state.signup.tabIndex
+        tabIndex: state.signup.tabIndex,
+        displayModal: state.signup.showModal
     }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
         onCloseModal:()=>dispatch(modalClose()),
+        onOpenModal:()=>dispatch(modalOpen()),
         onChangeTab:(index)=>dispatch(tabChange(index))
     }
 }

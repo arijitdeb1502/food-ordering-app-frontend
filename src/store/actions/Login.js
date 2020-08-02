@@ -2,46 +2,48 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 
-export const loginStart = ()=>{
+export const loginSuccess = ({
+    firstName,
+    accessToken
+})=>{
     return {
-        type: actionTypes.LOGIN_START,
+        type: actionTypes.LOGIN_SUCCESS,
+        userFirstName: firstName,
+        token: accessToken,
+        showModal: false,
+        userLoginSuccess: true
+    };
+};
 
-    }
-}
+export const loginFail = (error) => {
+    return {
+        type: actionTypes.LOGIN_FAIL,
+        error: error
+    };
+};
 
 export const login = (combinedCredentials) => {
     return dispatch => {
-        dispatch(loginStart());
-
-        // const instance = axios.create({
-        //     headers: {
-        //       post: {        
-        //         authorization: combinedCredentials
-        //       }
-        //     }
-        // })
+        // dispatch(loginSuccess());
         
         axios.defaults.headers['authorization']=combinedCredentials
 
         axios.post('/api/customer/login').then(response=>{
+            console.log(response.data['first_name']);
             console.log(response.headers['access-token']);
+
+            localStorage.setItem('token', response.headers['access-token']);
+            localStorage.setItem('first_name', response.data['first_name']);
+
+            dispatch(loginSuccess({
+                firstName: response.data['first_name'],
+                accessToken: response.headers['access-token']
+            }));
+
         }).catch(error=>{
             console.log({error});
+            dispatch(loginFail("Invalid Credentials!!"));
         })
         
-    //     axios.post(url, authData)
-    //         .then(response => {
-    //             console.log(response);
-    //             const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-    //             localStorage.setItem('token', response.data.idToken);
-    //             localStorage.setItem('expirationDate', expirationDate);
-    //             localStorage.setItem('userId', response.data.localId);
-    //             dispatch(authSuccess(response.data.idToken, response.data.localId));
-    //             dispatch(checkAuthTimeout(response.data.expiresIn));
-    //         })
-    //         .catch(err => {
-    //             dispatch(authFail(err.response.data.error));
-    //         });
-    // };
     }
 };

@@ -6,17 +6,23 @@ import {
     closeSnackBar
 } from './SignupReducerMethods';
 import {
-   loginStart
+   loginSuccess,
+   loginFail
 } from './LoginReducerMethods';
+import {
+   modalOpen
+} from './HeaderReducerMethods';
 
 const initialState = {
     userSignupSuccess: false,
+    userLoginSuccess:  false,
     snackbarMessage:'',
     tabIndex: 0,
+    showModal:false,
     token: null,
-    userContactNo: null,
+    userFirstName: null,
     error: null,
-    loading: false,
+    // loading: false,
     authRedirectPath: '/'
 };
 
@@ -28,7 +34,9 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.SIGNUP_MODAL_CLOSE: return modalClose(state,action);
         case actionTypes.SIGNUP_TAB_CHANGE: return tabChange(state,action);
         case actionTypes.SIGNUP_SNACKBAR_CLOSE: return closeSnackBar(state,action);
-        case actionTypes.LOGIN_START: return loginStart(state,action);
+        case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);
+        case actionTypes.LOGIN_FAIL: return loginFail(state,action);
+        case actionTypes.HEADER_MODAL_OPEN: return modalOpen(state,action);
         default:
             return state;
     }

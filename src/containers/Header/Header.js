@@ -7,6 +7,8 @@ import HeaderButton from '../../components/Header/ui/Button/Button';
 import HeaderModal from '../../components/Header/Modal/HeaderModal';
 import LoginForm from '../Header/Forms/LoginForm/LoginForm';
 import SignUpForm from '../Header/Forms/SignupForm/SignupForm';
+import HeaderMenuItem from '../../components/Header/MenuItem/HeaderMenuItem';
+
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -27,35 +29,22 @@ import styles from './Header.module.css';
 
 
 class Header extends Component{
-    // state ={
-    //     displayModal: this.props.showModal
-    // }
 
     modalOpenHandler=()=>{
-        // this.setState({displayModal:this.props.showModal})
-        // this.setState({displayModal: true})
-
         this.props.onOpenModal();
-    
     }
 
     closeModalHandler=()=>{
-    
-        // this.setState(
-        //                {
-        //                  displayModal:false
-        //                }
-        //               )
-        
         this.props.onCloseModal();
     }
 
     tabChangeHandler=(event,index)=>{
-        // this.setState({tabIndex:index});
         this.props.onChangeTab(index);
     }
 
     render(){
+
+        // console.log(this.props.isLoginSuccess);
         return(
             <Aux>
                 <div className={styles.Header}>
@@ -63,9 +52,19 @@ class Header extends Component{
                     <div className={styles.Search}>
                         <InputWithIcon/>
                     </div>
-                    <div className={styles.Button}>
-                        <HeaderButton clicked={this.modalOpenHandler}>Login</HeaderButton>
-                    </div>
+                    {!this.props.isLoginSuccess &&
+                        <div className={styles.Button}>
+                            <HeaderButton clicked={this.modalOpenHandler}>Login</HeaderButton>
+                        </div>
+                    }
+                    {
+                        this.props.isLoginSuccess &&
+                        <div className={styles.HeaderMenu}>
+                            <HeaderMenuItem 
+                               profileName={this.props.firstName}
+                            />
+                        </div>
+                    }
                 </div>
                   <HeaderModal 
                     // modalIsOpen={this.props.showModal}
@@ -92,7 +91,9 @@ class Header extends Component{
 const mapStateToProps = state=>{
     return{
         tabIndex: state.signup.tabIndex,
-        displayModal: state.signup.showModal
+        displayModal: state.signup.showModal,
+        isLoginSuccess: state.signup.userLoginSuccess,
+        firstName: state.signup.userFirstName
     }
 }
 

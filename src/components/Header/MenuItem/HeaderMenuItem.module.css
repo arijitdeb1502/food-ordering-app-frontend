@@ -1,0 +1,8 @@
+.ProfileName{
+    color: white;
+    margin-right: .5rem;
+}
+
+.Container{
+    display: flex;
+}

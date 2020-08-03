@@ -116,6 +116,14 @@ class LoginForm extends Component{
                             *required
                         </FormHelperText>
                     }
+                    {
+                        this.props.error &&
+                        <FormHelperText
+                            error
+                        >
+                            {this.props.error.split(":")[1]}
+                        </FormHelperText>
+                    }
                 </FormControl>
                 <FormButton clicked={this.formButtonClickHandler}>LOGIN</FormButton>
             </FormContainer>
@@ -123,10 +131,16 @@ class LoginForm extends Component{
     }
 }
 
+const mapStateToProps=(state=>{
+       return{
+           error: state.signup.error
+       }
+});
+
 const mapDispatchToProps=(dispatch=>{
     return{
         onLoginFormSubmit:( combinedUnamePass ) => dispatch( login( combinedUnamePass ) )
     }
-})
+});
 
-export default connect(null,mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps,mapDispatchToProps)(LoginForm);

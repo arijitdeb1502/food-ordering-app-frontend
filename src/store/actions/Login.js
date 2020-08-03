@@ -41,8 +41,8 @@ export const login = (combinedCredentials) => {
             }));
 
         }).catch(error=>{
-            console.log({error});
-            dispatch(loginFail("Invalid Credentials!!"));
+            console.log(error);
+            dispatch(loginFail(error));
         })
         
     }

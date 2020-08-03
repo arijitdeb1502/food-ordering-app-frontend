@@ -6,11 +6,11 @@ export const signup=(state,action)=>{
 }
 
 export const modalClose=(state,action)=>{
-    return updateObject( state, { tabIndex: 0,userSignupSuccess:false,showModal:false} );
+    return updateObject( state, { tabIndex: 0,userSignupSuccess:false,showModal:false,error:null} );
 }
 
 export const tabChange=(state,action)=>{
-    return updateObject(state,{tabIndex: action.tab})
+    return updateObject(state,{tabIndex: action.tab,error:null})
 }
 
 export const closeSnackBar=(state,action)=>{

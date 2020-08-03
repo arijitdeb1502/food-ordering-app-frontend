@@ -30,13 +30,13 @@ const initialState = {
 
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
+        case actionTypes.HEADER_MODAL_OPEN: return modalOpen(state,action);
         case actionTypes.SIGNUP_SUCCESS: return signup(state, action);
         case actionTypes.SIGNUP_MODAL_CLOSE: return modalClose(state,action);
         case actionTypes.SIGNUP_TAB_CHANGE: return tabChange(state,action);
         case actionTypes.SIGNUP_SNACKBAR_CLOSE: return closeSnackBar(state,action);
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);
-        case actionTypes.HEADER_MODAL_OPEN: return modalOpen(state,action);
         default:
             return state;
     }

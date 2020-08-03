@@ -7,3 +7,5 @@ export const SIGNUP_SNACKBAR_CLOSE='SIGNUP_SNACKBAR_CLOSE';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+
+export const LOGOUT_START = 'LOGOUT_START';

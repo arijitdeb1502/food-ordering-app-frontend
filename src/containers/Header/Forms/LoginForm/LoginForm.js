@@ -10,7 +10,7 @@ import FormButton from '../../../../components/Header/Forms/ui/Button/FormButton
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import {connect} from 'react-redux';
-import {login} from '../../../../store/actions/Login';
+import {login} from '../../../../store/actions/login';
 
 
 class LoginForm extends Component{

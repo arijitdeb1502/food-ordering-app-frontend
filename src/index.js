@@ -6,7 +6,7 @@ import AppRouter from './router/AppRouter';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore,combineReducers,compose,applyMiddleware } from 'redux';
-import signupReducer from './store/reducers/Auth';
+import signupReducer from './store/reducers/auth';
 import axios from 'axios';
 
 axios.defaults.baseURL="http://127.0.0.1:3001";

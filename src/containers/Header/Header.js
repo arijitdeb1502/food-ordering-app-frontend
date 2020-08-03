@@ -7,7 +7,7 @@ import HeaderButton from '../../components/Header/ui/Button/Button';
 import HeaderModal from '../../components/Header/Modal/HeaderModal';
 import LoginForm from '../Header/Forms/LoginForm/LoginForm';
 import SignUpForm from '../Header/Forms/SignupForm/SignupForm';
-import HeaderMenuItem from '../../components/Header/MenuItem/HeaderMenuItem';
+import HeaderMenuItem from './MenuItem/HeaderMenuItem';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -18,12 +18,12 @@ import {
          modalClose,
          tabChange
         } 
-from '../../store/actions/Signup';
+from '../../store/actions/signup';
 
 import {
     modalOpen
 }
-from '../../store/actions/Header';
+from '../../store/actions/header';
 
 import styles from './Header.module.css';
 

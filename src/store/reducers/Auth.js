@@ -10,7 +10,8 @@ import {
    loginFail
 } from './LoginReducerMethods';
 import {
-   modalOpen
+   modalOpen,
+   logoutStart
 } from './HeaderReducerMethods';
 
 const initialState = {
@@ -37,6 +38,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.SIGNUP_SNACKBAR_CLOSE: return closeSnackBar(state,action);
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);
+        case actionTypes.LOGOUT_START: return logoutStart(state,action);
         default:
             return state;
     }

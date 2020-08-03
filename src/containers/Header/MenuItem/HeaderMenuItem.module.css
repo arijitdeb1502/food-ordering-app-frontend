@@ -1,8 +1,19 @@
 .ProfileName{
     color: white;
-    margin-right: .5rem;
 }
 
 .Container{
     display: flex;
+    margin-right: 2rem;
+}
+
+.Menu{
+    margin-top: 1.5rem;
+}
+
+@media(max-width: 600px) {
+
+    .Menu{
+        margin-top: 3rem;
+    }
 }

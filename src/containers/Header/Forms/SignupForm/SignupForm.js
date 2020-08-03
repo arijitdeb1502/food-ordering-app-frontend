@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import {signup} from '../../../../store/actions/Signup';
+import {signup} from '../../../../store/actions/signup';
 
 import axios from 'axios';
 

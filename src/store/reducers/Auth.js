@@ -7,7 +7,8 @@ import {
 } from './SignupReducerMethods';
 import {
    loginSuccess,
-   loginFail
+   loginFail,
+   resetLoginState
 } from './LoginReducerMethods';
 import {
    modalOpen,
@@ -39,6 +40,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.LOGIN_SUCCESS: return loginSuccess(state,action);
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);
         case actionTypes.LOGOUT_START: return logoutStart(state,action);
+        case actionTypes.RESET_LOGIN_STATE: return resetLoginState(state,action); 
         default:
             return state;
     }

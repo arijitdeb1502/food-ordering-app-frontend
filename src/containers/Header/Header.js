@@ -14,6 +14,9 @@ import Tab from '@material-ui/core/Tab';
 
 import {connect} from 'react-redux';
 
+import {isTokenValid} from './Utility/auth';
+
+
 import {
          modalClose,
          tabChange
@@ -21,14 +24,34 @@ import {
 from '../../store/actions/signup';
 
 import {
-    modalOpen
+    modalOpen,
+    logout
 }
 from '../../store/actions/header';
+
+import {
+    loginSuccess
+}
+from '../../store/actions/login';
 
 import styles from './Header.module.css';
 
 
 class Header extends Component{
+
+    componentDidMount(){
+        const token=localStorage.getItem('token');
+        const firstName=localStorage.getItem('first_name');
+        console.log(firstName);
+    
+        console.log(isTokenValid(token));
+        if(token===null||!isTokenValid(token)){
+            this.props.onInvalidToken()
+        }else{
+            this.props.onValidToken(token,firstName);
+        }
+    }
+    
 
     modalOpenHandler=()=>{
         this.props.onOpenModal();
@@ -43,8 +66,20 @@ class Header extends Component{
     }
 
     render(){
+        // if(localStorage.getItem("token")){
 
-        // console.log(this.props.isLoginSuccess);
+       
+        //     console.log("token in Header:"+localStorage.getItem("token"));
+        //     console.log("decoded:"+jwt.decode(localStorage.getItem("token")).iat+":"+jwt.decode(localStorage.getItem("token")).exp);
+        //     const currentDate=Math.floor(Date.now() / 1000);
+        //     const expiredAt=jwt.decode(localStorage.getItem("token")).exp;
+        //     console.log("expiredAt:"+expiredAt);
+        //     const delta=expiredAt-currentDate;
+        //     console.log("Current Date:"+Math.floor(Date.now() / 1000));
+        //     console.log("Delta:"+delta);
+
+        // }
+
         return(
             <Aux>
                 <div className={styles.Header}>
@@ -101,7 +136,9 @@ const mapDispatchToProps = dispatch=>{
     return{
         onCloseModal:()=>dispatch(modalClose()),
         onOpenModal:()=>dispatch(modalOpen()),
-        onChangeTab:(index)=>dispatch(tabChange(index))
+        onChangeTab:(index)=>dispatch(tabChange(index)),
+        onInvalidToken:()=>dispatch(logout()),
+        onValidToken:(token,firstName)=>dispatch(loginSuccess(token,firstName))
     }
 }
 

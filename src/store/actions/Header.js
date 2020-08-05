@@ -7,7 +7,7 @@ export const modalOpen = () =>{
 };
 
 export const logout = () => {
-    localStorage.removeItem('access-token');
+    localStorage.removeItem('token');
     localStorage.removeItem('first_name');
     return {
         type: actionTypes.LOGOUT_START

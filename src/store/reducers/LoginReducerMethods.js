@@ -10,6 +10,16 @@ export const loginSuccess = (state, action) => {
      } );
 };
 
+export const resetLoginState = (state,action)=>{
+    return updateObject( state, { 
+        token: null,
+        userFirstName: null,
+        showModal: false,
+        userLoginSuccess: false,
+        error: null
+     } );
+}
+
 
 export const loginFail = (state, action) => {
     return updateObject( state, { 

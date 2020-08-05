@@ -5,8 +5,14 @@ import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import {connect} from 'react-redux';
 
 import {
+  isTokenValid
+} from '../Utility/auth';
+
+import {
   logout
 } from '../../../store/actions/header';
+
+
 
 import Aux from '../../../hoc/Aux';
 
@@ -16,6 +22,7 @@ import styles from './HeaderMenuItem.module.css';
 
 class HeaderMenuItem extends Component{
 
+  
   state={
     anchorEl: null,
     openMenu: false
@@ -40,6 +47,7 @@ class HeaderMenuItem extends Component{
   }
 
   render(){  
+
 
     return(
       <Aux>

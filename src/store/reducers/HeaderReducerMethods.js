@@ -9,7 +9,6 @@ export const logoutStart=(state,action)=>{
     return updateObject( state, { 
         token: null,
         userFirstName: null,
-        // showModal: action.showModal,
         userLoginSuccess: false,
         error: null
      } );

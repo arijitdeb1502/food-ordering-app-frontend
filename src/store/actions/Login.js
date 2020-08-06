@@ -6,15 +6,19 @@ import * as actionTypes from './actionTypes';
 
 
 export const loginSuccess = ({
-    firstName,
-    accessToken
+    firstName=localStorage.getItem('first_name'),
+    accessToken=localStorage.getItem('token'),
+    authRedirectPath
 })=>{
+
+    console.log("loginSuccess"+authRedirectPath)
     return {
         type: actionTypes.LOGIN_SUCCESS,
         userFirstName: firstName,
         token: accessToken,
         showModal: false,
-        userLoginSuccess: true
+        userLoginSuccess: true,
+        authRedirectPath: authRedirectPath
     };
 };
 

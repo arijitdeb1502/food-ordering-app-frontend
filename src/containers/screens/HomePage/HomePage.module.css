@@ -1,7 +1,7 @@
 .CardMedia{
-    height: 5rem;
+    height: 6rem;
     width: 14rem;
-    margin-top: 1rem;
+    margin-top: 0;
 }
 
 .Container{
@@ -9,8 +9,22 @@
     grid-template-columns: auto auto auto auto;
     padding: 0;
     margin-left: 2rem;
+    margin-top: 2rem;
     grid-gap: 1rem;
-    height: 15rem;
-    width: 15rem;
-    /* margin-top: 1rem; */
+    height: 4rem;
+    width: 4rem;
+}
+
+.FlexContainer{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    margin-left: 0;
+    width:37%
+}
+
+.Rating{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

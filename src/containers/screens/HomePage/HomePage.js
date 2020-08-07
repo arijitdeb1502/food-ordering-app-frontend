@@ -35,13 +35,11 @@ class HomePage extends Component{
         return(
             <Aux>
                 <div 
-                    // cellHeight={140} 
-                    // cols={4} 
                     className={styles.Container}
                 >
                 {Restaurants.map((restaurant)=>{
-                        return (
-                            <div key={restaurant.id}>
+                    return (
+                        <div key={restaurant.id}>
                             <Card>
                                 <CardMedia
                                     component="jpg" 
@@ -49,26 +47,42 @@ class HomePage extends Component{
                                     className={styles.CardMedia}
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h3">
-                                        {restaurant.restaurant_name}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                         {restaurant.categories}  
-                                    </Typography>
-                                    <Box display="flex" flexDirection="row">
-                                        <Box flexGrow={1} bgcolor="grey.300">
-                                            <StarIcon></StarIcon>
-                                            {restaurant.customer_rating}
-                                            ({restaurant.number_customers_rated})
+                                    <Typography 
+                                        gutterBottom 
+                                        variant="h5" 
+                                        component="h3">
+                                        <Box style={{height:'4rem'}}>    
+                                            {restaurant.restaurant_name}
                                         </Box>
-                                        <Box>
-                                            Price Item
+                                    </Typography>
+                                    <Typography 
+                                        variant="body2" 
+                                        color="textSecondary" 
+                                        component="p"
+                                    >
+                                        <Box style={{height:'4rem'}}>
+                                            {restaurant.categories}
                                         </Box>
-                                    </Box>
+                                        <Box className={styles.Rating}>
+                                            <Box 
+                                                style={{ 
+                                                        fontSize: '.75rem',
+                                                        backgroundColor:'rgb(206, 206, 40)',
+                                                        paddingRight: '.5rem'
+                                                       }}>
+                                                <StarIcon style={{height:'.75rem'}}></StarIcon>
+                                                {restaurant.customer_rating}
+                                                ({restaurant.number_customers_rated})
+                                            </Box>
+                                            <Box>
+                                                {restaurant.average_price} for 2
+                                            </Box>
+                                        </Box>
+                                    </Typography>
                                 </CardContent>
                             </Card>
-                            </div>
-                        )
+                        </div>
+                    )
                 })}
                 </div>
                 <Snackbar

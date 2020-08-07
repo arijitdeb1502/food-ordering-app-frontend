@@ -7,18 +7,14 @@ import * as actionTypes from './actionTypes';
 
 export const loginSuccess = ({
     firstName=localStorage.getItem('first_name'),
-    accessToken=localStorage.getItem('token'),
-    authRedirectPath
+    accessToken=localStorage.getItem('token')
 })=>{
-
-    console.log("loginSuccess"+authRedirectPath)
     return {
         type: actionTypes.LOGIN_SUCCESS,
         userFirstName: firstName,
         token: accessToken,
         showModal: false,
-        userLoginSuccess: true,
-        authRedirectPath: authRedirectPath
+        userLoginSuccess: true
     };
 };
 
@@ -78,3 +74,9 @@ export const login = (combinedCredentials) => {
     }
 };
 
+export const setRedirectPath=(path)=>{
+    return{
+        type: actionTypes.SET_REDIRECT_PATH,
+        path: path
+    }
+}

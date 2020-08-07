@@ -12,7 +12,8 @@ import {
 } from './LoginReducerMethods';
 import {
    modalOpen,
-   logoutStart
+   logoutStart,
+   setRedirectPath
 } from './HeaderReducerMethods';
 
 const initialState = {
@@ -41,6 +42,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.LOGIN_FAIL: return loginFail(state,action);
         case actionTypes.LOGOUT_START: return logoutStart(state,action);
         case actionTypes.RESET_LOGIN_STATE: return resetLoginState(state,action); 
+        case actionTypes.SET_REDIRECT_PATH: return setRedirectPath(state,action)
         default:
             return state;
     }

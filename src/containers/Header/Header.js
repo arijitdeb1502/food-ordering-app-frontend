@@ -31,7 +31,8 @@ import {
 from '../../store/actions/header';
 
 import {
-    loginSuccess
+    loginSuccess,
+    setRedirectPath
 }
 from '../../store/actions/login';
 
@@ -39,7 +40,6 @@ import styles from './Header.module.css';
 
 
 class Header extends Component{
-    
 
     modalOpenHandler=()=>{
         this.props.onOpenModal();
@@ -55,16 +55,17 @@ class Header extends Component{
 
     render(){
 
-        const token=localStorage.getItem('token');
-        const firstName=localStorage.getItem('first_name');
+        const token=localStorage.getItem('token');        
         
         if(token===null||!isTokenValid(token)){
             this.props.onInvalidToken()
         }else{
-            this.props.onValidToken(firstName,token,"/profile");
-            
+            this.props.dispatchLoginSuccess();
+            this.props.redirectPathTo();
         }
-        console.log(this.props.redirectPath) 
+
+        console.log(this.props.redirectPath);
+
         return(
             <Aux>
                 <div className={styles.Header}>
@@ -124,7 +125,8 @@ const mapDispatchToProps = dispatch=>{
         onOpenModal:()=>dispatch(modalOpen()),
         onChangeTab:(index)=>dispatch(tabChange(index)),
         onInvalidToken:()=>dispatch(logout()),
-        onValidToken:(firstName,token,redirectPath)=>dispatch(loginSuccess(firstName,token,redirectPath))
+        dispatchLoginSuccess:()=>dispatch(loginSuccess("","")),
+        redirectPathTo:()=>dispatch(setRedirectPath("/home"))
     }
 }
 

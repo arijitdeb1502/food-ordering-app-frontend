@@ -15,7 +15,7 @@ class Restaurant extends Component{
         return(
             <Card>
                 <CardMedia
-                    component="jpg" 
+                    // component="JPG" 
                     image={this.props.restaurant_photo_URL}
                     className={styles.CardMedia}
                 />
@@ -23,15 +23,15 @@ class Restaurant extends Component{
                     <Typography 
                         gutterBottom 
                         variant="h5" 
-                        component="h3">
-                        <Box style={{height:'4rem'}}>    
-                            {this.props.restaurant_restaurant_name}
-                        </Box>
+                        component="h3"
+                        style={{height:'4rem'}}
+                    >   
+                        {this.props.restaurant_restaurant_name}
                     </Typography>
                     <Typography 
                         variant="body2" 
-                        color="textSecondary" 
-                        component="p"
+                        color="textSecondary"
+                        component="span" 
                     >
                         <Box style={{height:'4rem'}}>
                             {this.props.restaurant_categories}

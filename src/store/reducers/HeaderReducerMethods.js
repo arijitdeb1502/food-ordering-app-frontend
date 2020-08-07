@@ -13,3 +13,9 @@ export const logoutStart=(state,action)=>{
         error: null
      } );
 }
+
+export const setRedirectPath=(state,action)=>{
+    return updateObject(state,{
+        authRedirectPath: action.path
+    })
+}

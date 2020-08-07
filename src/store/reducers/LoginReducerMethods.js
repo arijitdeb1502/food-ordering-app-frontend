@@ -6,7 +6,8 @@ export const loginSuccess = (state, action) => {
         userFirstName: action.userFirstName,
         showModal: action.showModal,
         userLoginSuccess: action.userLoginSuccess,
-        error: null
+        error: null,
+        authRedirectPath: action.path
      } );
 };
 

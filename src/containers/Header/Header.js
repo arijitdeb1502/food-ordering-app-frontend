@@ -31,8 +31,7 @@ import {
 from '../../store/actions/header';
 
 import {
-    loginSuccess,
-    setRedirectPath
+    loginSuccess
 }
 from '../../store/actions/login';
 
@@ -40,6 +39,18 @@ import styles from './Header.module.css';
 
 
 class Header extends Component{
+
+    componentDidMount(){
+
+        const token=localStorage.getItem('token');        
+        
+        if(token===null||!isTokenValid(token)){
+            this.props.onInvalidToken()
+        }else{
+            this.props.dispatchLoginSuccess();
+            // this.props.redirectPathTo();
+        }
+    }
 
     modalOpenHandler=()=>{
         this.props.onOpenModal();
@@ -54,15 +65,6 @@ class Header extends Component{
     }
 
     render(){
-
-        const token=localStorage.getItem('token');        
-        
-        if(token===null||!isTokenValid(token)){
-            this.props.onInvalidToken()
-        }else{
-            this.props.dispatchLoginSuccess();
-            this.props.redirectPathTo();
-        }
 
         console.log(this.props.redirectPath);
 
@@ -125,8 +127,8 @@ const mapDispatchToProps = dispatch=>{
         onOpenModal:()=>dispatch(modalOpen()),
         onChangeTab:(index)=>dispatch(tabChange(index)),
         onInvalidToken:()=>dispatch(logout()),
-        dispatchLoginSuccess:()=>dispatch(loginSuccess("","")),
-        redirectPathTo:()=>dispatch(setRedirectPath("/home"))
+        dispatchLoginSuccess:()=>dispatch(loginSuccess(localStorage.getItem('first_name'),localStorage.getItem('token'),"/home")),
+        // redirectPathTo:()=>dispatch(setRedirectPath("/home"))
     }
 }
 

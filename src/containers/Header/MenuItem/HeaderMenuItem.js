@@ -5,13 +5,12 @@ import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import {connect} from 'react-redux';
 
 import {
-  isTokenValid
-} from '../Utility/auth';
-
-import {
   logout
 } from '../../../store/actions/header';
 
+import {
+  setRedirectPath
+} from '../../../store/actions/login'
 
 
 import Aux from '../../../hoc/Aux';
@@ -44,6 +43,7 @@ class HeaderMenuItem extends Component{
 
   logoutMenuClickHandler=()=>{
     this.props.onLogout();
+    this.props.redirectToHome();
   }
 
   render(){  
@@ -81,7 +81,8 @@ class HeaderMenuItem extends Component{
 
 const mapDispatchToProps= dispatch=>{
   return{
-    onLogout: ()=> dispatch(logout())
+    onLogout: ()=> dispatch(logout()),
+    redirectToHome: ()=> dispatch(setRedirectPath("/home"))
   }
 }
 

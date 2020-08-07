@@ -5,16 +5,8 @@ import {closeSnackBar} from '../../../store/actions/signup';
 
 import Aux from '../../../hoc/Aux';
 import Snackbar from '@material-ui/core/Snackbar';
-// import GridList from '@material-ui/core/GridList';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import StarIcon from '@material-ui/icons/Star';
 
-
-
+import Restaurant from './Restaurant/Restaurant';
 import {Restaurants} from '../../../backend/GetAllRestaurants';
 
 import styles from './HomePage.module.css';
@@ -40,47 +32,14 @@ class HomePage extends Component{
                 {Restaurants.map((restaurant)=>{
                     return (
                         <div key={restaurant.id}>
-                            <Card>
-                                <CardMedia
-                                    component="jpg" 
-                                    image={restaurant.photo_URL}
-                                    className={styles.CardMedia}
-                                />
-                                <CardContent>
-                                    <Typography 
-                                        gutterBottom 
-                                        variant="h5" 
-                                        component="h3">
-                                        <Box style={{height:'4rem'}}>    
-                                            {restaurant.restaurant_name}
-                                        </Box>
-                                    </Typography>
-                                    <Typography 
-                                        variant="body2" 
-                                        color="textSecondary" 
-                                        component="p"
-                                    >
-                                        <Box style={{height:'4rem'}}>
-                                            {restaurant.categories}
-                                        </Box>
-                                        <Box className={styles.Rating}>
-                                            <Box 
-                                                style={{ 
-                                                        fontSize: '.75rem',
-                                                        backgroundColor:'rgb(206, 206, 40)',
-                                                        paddingRight: '.5rem'
-                                                       }}>
-                                                <StarIcon style={{height:'.75rem'}}></StarIcon>
-                                                {restaurant.customer_rating}
-                                                ({restaurant.number_customers_rated})
-                                            </Box>
-                                            <Box>
-                                                {restaurant.average_price} for 2
-                                            </Box>
-                                        </Box>
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                            <Restaurant
+                                restaurant_photo_URL={restaurant.photo_URL}
+                                restaurant_restaurant_name={restaurant.restaurant_name}
+                                restaurant_categories={restaurant.categories}
+                                restaurant_customer_rating={restaurant.customer_rating}
+                                restaurant_number_customers_rated={restaurant.number_customers_rated}
+                                restaurant_average_price={restaurant.average_price}
+                            />
                         </div>
                     )
                 })}

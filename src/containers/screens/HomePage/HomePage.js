@@ -11,12 +11,12 @@ import {Restaurants} from '../../../backend/GetAllRestaurants';
 
 import styles from './HomePage.module.css';
 
+import { checkTokenExpiration } from '../../../store/actions/login';
+
 class HomePage extends Component{
 
     componentDidMount(){
-        // Restaurants.map((restaurant)=>{
-               
-        // })
+           this.props.onComponentMount();
     }
 
     closeSnackbarHandler=()=>{
@@ -24,6 +24,7 @@ class HomePage extends Component{
     }
 
     render(){
+        // console.log("Homepage:"+this.props.redirectPath);
         return(
             <Aux>
                 <div 
@@ -61,13 +62,15 @@ class HomePage extends Component{
 const mapStateToProps= state=>{
     return {
         showSnackBar: state.signup.userSignupSuccess,
-        displaySignupSuccessMsg: state.signup.snackbarMessage
+        displaySignupSuccessMsg: state.signup.snackbarMessage,
+        redirectPath: state.signup.authRedirectPath
     };
 }
 
 const mapDispatchToProps=dispatch=>{
     return{
-        onCloseSnackbar: ()=>dispatch(closeSnackBar())
+        onCloseSnackbar: ()=>dispatch(closeSnackBar()),
+        onComponentMount: ()=>dispatch(checkTokenExpiration())
     };
 }
 

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Redirect from 'react-router-dom';
+// import Redirect from 'react-router-dom';
 
 import Aux from '../../hoc/Aux';
 import ColoredFastFoodIcon from '../../components/Header/ui/icon/FastFoodIcon';
@@ -15,7 +15,7 @@ import Tab from '@material-ui/core/Tab';
 
 import {connect} from 'react-redux';
 
-import {isTokenValid} from './Utility/auth';
+// import {isTokenValid} from './Utility/auth';
 
 
 import {
@@ -25,32 +25,15 @@ import {
 from '../../store/actions/signup';
 
 import {
-    modalOpen,
-    logout
+    modalOpen
 }
 from '../../store/actions/header';
 
-import {
-    loginSuccess
-}
-from '../../store/actions/login';
 
 import styles from './Header.module.css';
 
 
 class Header extends Component{
-
-    componentDidMount(){
-
-        const token=localStorage.getItem('token');        
-        
-        if(token===null||!isTokenValid(token)){
-            this.props.onInvalidToken()
-        }else{
-            this.props.dispatchLoginSuccess();
-            // this.props.redirectPathTo();
-        }
-    }
 
     modalOpenHandler=()=>{
         this.props.onOpenModal();
@@ -66,7 +49,6 @@ class Header extends Component{
 
     render(){
 
-        console.log(this.props.redirectPath);
 
         return(
             <Aux>
@@ -90,7 +72,6 @@ class Header extends Component{
                     }
                 </div>
                   <HeaderModal 
-                    // modalIsOpen={this.props.showModal}
                     modalIsOpen={this.props.displayModal}
                     closeModal={this.closeModalHandler}
                     modalStyle={styles.Modal}
@@ -117,7 +98,6 @@ const mapStateToProps = state=>{
         displayModal: state.signup.showModal,
         isLoginSuccess: state.signup.userLoginSuccess,
         firstName: state.signup.userFirstName,
-        redirectPath: state.signup.authRedirectPath
     }
 }
 
@@ -126,8 +106,8 @@ const mapDispatchToProps = dispatch=>{
         onCloseModal:()=>dispatch(modalClose()),
         onOpenModal:()=>dispatch(modalOpen()),
         onChangeTab:(index)=>dispatch(tabChange(index)),
-        onInvalidToken:()=>dispatch(logout()),
-        dispatchLoginSuccess:()=>dispatch(loginSuccess(localStorage.getItem('first_name'),localStorage.getItem('token'),"/home")),
+        // onInvalidToken:()=>dispatch(logout()),
+        // dispatchLoginSuccess:()=>dispatch(loginSuccess(localStorage.getItem('first_name'),localStorage.getItem('token'),"/home")),
         // redirectPathTo:()=>dispatch(setRedirectPath("/home"))
     }
 }

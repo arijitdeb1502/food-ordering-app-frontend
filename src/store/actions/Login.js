@@ -7,16 +7,15 @@ import * as actionTypes from './actionTypes';
 
 export const loginSuccess = ({
     firstName=localStorage.getItem('first_name'),
-    accessToken=localStorage.getItem('token'),
-    path
+    accessToken=localStorage.getItem('token')
 })=>{
     return {
         type: actionTypes.LOGIN_SUCCESS,
         userFirstName: firstName,
         token: accessToken,
         showModal: false,
-        userLoginSuccess: true,
-        authRedirectPath: path
+        userLoginSuccess: true
+        // authRedirectPath: path
     };
 };
 
@@ -38,15 +37,26 @@ export const checkTokenExpiration = () => {
     
     return dispatch =>{
         const currentDate=Math.floor(Date.now() / 1000);
-        const expiredAt=jwt.decode(localStorage.getItem('token')).exp;
-        const delta=expiredAt-currentDate;
 
-        if(delta<=0){
+        if(jwt.decode(localStorage.getItem('token')))
+        {
 
-            localStorage.removeItem('token');
-            localStorage.removeItem('first_name');
+            const expiredAt=jwt.decode(localStorage.getItem('token')).exp;
+            const delta=expiredAt-currentDate;
+            if(delta<=0){
+
+                localStorage.removeItem('token');
+                localStorage.removeItem('first_name');
+                dispatch(resetLoginState());
+            }else{
+                dispatch(loginSuccess(localStorage.getItem('first_name'),localStorage.getItem('token')))
+            }
+        }else{
             dispatch(resetLoginState());
         }
+            
+        
+        
     }
     
 };
@@ -64,7 +74,8 @@ export const login = (combinedCredentials) => {
 
             dispatch(loginSuccess({
                 firstName: response.data['first_name'],
-                accessToken: response.headers['access-token']
+                accessToken: response.headers['access-token'],
+                path: "/"
             }));
             dispatch(checkTokenExpiration());
 

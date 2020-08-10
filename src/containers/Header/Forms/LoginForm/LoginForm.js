@@ -134,6 +134,7 @@ class LoginForm extends Component{
 const mapStateToProps=(state=>{
        return{
            error: state.signup.error
+        //    redirectPath: state.signup.authRedirectPath
        }
 });
 

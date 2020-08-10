@@ -1,6 +1,7 @@
 import { updateObject } from '../utility';
 
 export const loginSuccess = (state, action) => {
+    // console.log("action:"+JSON.stringify(action));
     return updateObject( state, { 
         token: action.token,
         userFirstName: action.userFirstName,
@@ -17,7 +18,8 @@ export const resetLoginState = (state,action)=>{
         userFirstName: null,
         showModal: false,
         userLoginSuccess: false,
-        error: null
+        error: null,
+        authRedirectPath: "/"
      } );
 }
 

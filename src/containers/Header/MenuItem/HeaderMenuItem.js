@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {
@@ -9,6 +10,7 @@ import {
 } from '../../../store/actions/header';
 
 import {
+  checkTokenExpiration,
   setRedirectPath
 } from '../../../store/actions/login'
 
@@ -18,10 +20,12 @@ import Aux from '../../../hoc/Aux';
 import styles from './HeaderMenuItem.module.css';
 
 
-
 class HeaderMenuItem extends Component{
 
-  
+  componentDidMount(){
+    this.props.onComponentMount()
+  }
+
   state={
     anchorEl: null,
     openMenu: false
@@ -43,15 +47,27 @@ class HeaderMenuItem extends Component{
 
   logoutMenuClickHandler=()=>{
     this.props.onLogout();
-    this.props.redirectToHome();
+    this.props.onLogoutMenuClick();
+
+    this.setState({
+      openMenu:false
+    });
+
+  }
+
+  profileMenuClickHandler=()=>{
+      this.setState({
+        openMenu: false
+      });
+
+      this.props.onProfileMenuClick();
   }
 
   render(){  
 
-
     return(
       <Aux>
-      
+        {/* {this.state.currentPage}      */}
         <div className={styles.Container}>
           <AccountCircleRoundedIcon 
               style={{color:'white'}}
@@ -71,19 +87,33 @@ class HeaderMenuItem extends Component{
             onClose={this.closeMenuHandler}
             className={styles.Menu}
         >
-          <MenuItem>My Profile</MenuItem>
-          <MenuItem onClick={this.logoutMenuClickHandler}>Logout</MenuItem>
-          </Menu>
+          <MenuItem onClick={this.profileMenuClickHandler}>
+            <NavLink to='/profile' style={{textDecoration:'none',color:'black'}}>My Profile</NavLink>
+          </MenuItem>
+          <MenuItem onClick={this.logoutMenuClickHandler}>
+            <NavLink to='/' style={{textDecoration:'none',color:'black'}}>Logout</NavLink>
+          </MenuItem>
+        </Menu>
       </Aux>
     )
+  }
+}
+
+const mapStateToProps= state=>{
+  return{
+    profileName: state.signup.userFirstName,
+    currentPage: state.signup.authRedirectPath
   }
 }
 
 const mapDispatchToProps= dispatch=>{
   return{
     onLogout: ()=> dispatch(logout()),
-    redirectToHome: ()=> dispatch(setRedirectPath("/home"))
+    onComponentMount: ()=> dispatch(checkTokenExpiration()),
+    // redirectToHome: ()=> dispatch(setRedirectPath("/home"))
+    onProfileMenuClick: ()=> dispatch(setRedirectPath("/profile")),
+    onLogoutMenuClick: ()=> dispatch(setRedirectPath("/"))
   }
 }
 
-export default connect(null,mapDispatchToProps)(HeaderMenuItem);
+export default connect(mapStateToProps,mapDispatchToProps)(HeaderMenuItem);

@@ -24,12 +24,15 @@ class HomePage extends Component{
     }
 
     render(){
+        
         return(
             <Aux>
                 <div 
                     className={styles.Container}
                 >
-                {Restaurants.map((restaurant)=>{
+                {Restaurants.filter(
+                        restaurant=>restaurant.restaurant_name.toLowerCase().includes(this.props.filterVal.toLowerCase())
+                    ).map((restaurant)=>{
                     return (
                         <div key={restaurant.id}>
                             <Restaurant
@@ -62,7 +65,8 @@ const mapStateToProps= state=>{
     return {
         showSnackBar: state.signup.userSignupSuccess,
         displaySignupSuccessMsg: state.signup.snackbarMessage,
-        redirectPath: state.signup.authRedirectPath
+        redirectPath: state.signup.authRedirectPath,
+        filterVal:  state.filter.filterTxt
     };
 }
 

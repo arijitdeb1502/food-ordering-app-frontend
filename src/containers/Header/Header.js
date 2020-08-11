@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 
 import Aux from '../../hoc/Aux';
 import ColoredFastFoodIcon from '../../components/Header/ui/icon/FastFoodIcon';
-import InputWithIcon from '../../components/Header/ui/Filter/Filter';
+import InputWithIcon from './Filter/Filter';
 import HeaderButton from '../../components/Header/ui/Button/Button';
 import HeaderModal from '../../components/Header/Modal/HeaderModal';
 import LoginForm from '../Header/Forms/LoginForm/LoginForm';
@@ -14,9 +14,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import {connect} from 'react-redux';
-
-// import {isTokenValid} from './Utility/auth';
-
 
 import {
          modalClose,
@@ -48,8 +45,6 @@ class Header extends Component{
     }
 
     render(){
-
-
         return(
             <Aux>
                 <div className={styles.Header}>
@@ -106,9 +101,6 @@ const mapDispatchToProps = dispatch=>{
         onCloseModal:()=>dispatch(modalClose()),
         onOpenModal:()=>dispatch(modalOpen()),
         onChangeTab:(index)=>dispatch(tabChange(index)),
-        // onInvalidToken:()=>dispatch(logout()),
-        // dispatchLoginSuccess:()=>dispatch(loginSuccess(localStorage.getItem('first_name'),localStorage.getItem('token'),"/home")),
-        // redirectPathTo:()=>dispatch(setRedirectPath("/home"))
     }
 }
 

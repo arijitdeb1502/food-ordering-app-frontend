@@ -24,7 +24,6 @@ class HomePage extends Component{
     }
 
     render(){
-        // console.log("Homepage:"+this.props.redirectPath);
         return(
             <Aux>
                 <div 

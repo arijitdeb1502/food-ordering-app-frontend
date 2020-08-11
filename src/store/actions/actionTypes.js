@@ -12,3 +12,5 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_START = 'LOGOUT_START';
 
 export const RESET_LOGIN_STATE = 'RESET_LOGIN_STATE';
+
+export const SET_FILTER_TEXT='SET_FILTER_TEXT';

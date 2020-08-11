@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore,combineReducers,compose,applyMiddleware } from 'redux';
 import signupReducer from './store/reducers/auth';
+import filterReducer from './store/reducers/filter';
 import axios from 'axios';
 
 axios.defaults.baseURL="http://127.0.0.1:3001";
@@ -14,7 +15,8 @@ axios.defaults.baseURL="http://127.0.0.1:3001";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  signup: signupReducer
+  signup: signupReducer,
+  filter: filterReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
+
 
 import {closeSnackBar} from '../../../store/actions/signup';
 
@@ -7,7 +9,7 @@ import Aux from '../../../hoc/Aux';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import Restaurant from './Restaurant/Restaurant';
-import {Restaurants} from '../../../backend/GetAllRestaurants';
+// import {Restaurants} from '../../../backend/GetAllRestaurants';
 
 import styles from './HomePage.module.css';
 
@@ -15,7 +17,27 @@ import { checkTokenExpiration } from '../../../store/actions/login';
 
 class HomePage extends Component{
 
+    state = {
+        restaurants : []
+    };
+
     componentDidMount(){
+           axios.get("/api/restaurant")
+            .then((data)=>{
+                console.log(data.data.restaurants)
+                this.setState(()=>{
+                    return {
+                        restaurants: data.data.restaurants
+                    }
+                })  
+            }).catch((error)=>{
+                console.log(error)    
+            })
+        //    this.setState(()=>{
+        //        return{
+        //            restaurants: Restaurants
+        //        }
+        //    })
            this.props.onComponentMount();
     }
 
@@ -30,7 +52,7 @@ class HomePage extends Component{
                 <div 
                     className={styles.Container}
                 >
-                {Restaurants.filter(
+                {this.state.restaurants.filter(
                         restaurant=>restaurant.restaurant_name.toLowerCase().includes(this.props.filterVal.toLowerCase())
                     ).map((restaurant)=>{
                     return (

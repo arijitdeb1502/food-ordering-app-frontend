@@ -10,7 +10,7 @@ import signupReducer from './store/reducers/auth';
 import filterReducer from './store/reducers/filter';
 import axios from 'axios';
 
-axios.defaults.baseURL="http://127.0.0.1:3001";
+axios.defaults.baseURL="https://adeb-test-food-order-backend.herokuapp.com/";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

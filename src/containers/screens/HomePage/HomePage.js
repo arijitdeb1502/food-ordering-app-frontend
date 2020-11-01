@@ -1,19 +1,24 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+
+
 import axios from 'axios';
 
 
 import {closeSnackBar} from '../../../store/actions/signup';
 
 import Aux from '../../../hoc/Aux';
-import Snackbar from '@material-ui/core/Snackbar';
+
 
 import Restaurant from './Restaurant/Restaurant';
-import {Restaurants} from '../../../backend/GetAllRestaurants';
 
 import styles from './HomePage.module.css';
 
 import { checkTokenExpiration } from '../../../store/actions/login';
+
+
 
 class HomePage extends Component{
 
@@ -33,11 +38,7 @@ class HomePage extends Component{
             }).catch((error)=>{
                 console.log(error)    
             })
-        //    this.setState(()=>{
-        //        return{
-        //            restaurants: Restaurants
-        //        }
-        //    })
+        
            this.props.onComponentMount();
     }
 
@@ -46,9 +47,13 @@ class HomePage extends Component{
     }
 
     render(){
-        
-        return(
-            <Aux>
+
+
+        const toBeLoaded=this.state.restaurants.length===0?
+                <div style={{marginTop: '22%' , marginLeft: '45%'}}><CircularProgress /></div>
+                :
+                (
+                <Aux>
                 <div 
                     className={styles.Container}
                 >
@@ -79,7 +84,8 @@ class HomePage extends Component{
                     message={this.props.displaySignupSuccessMsg}
                 />
             </Aux>
-        )
+            )    
+        return toBeLoaded
     }
 }
 

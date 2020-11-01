@@ -33,7 +33,7 @@ class Restaurant extends Component{
                         color="textSecondary"
                         component="span" 
                     >
-                        <Box style={{height:'4rem'}}>
+                        <Box style={{height:'3.5rem',width:'100%'}}>
                             {this.props.restaurant_categories}
                         </Box>
                         <Box className={styles.Rating}>

@@ -9,7 +9,7 @@ import Aux from '../../../hoc/Aux';
 import Snackbar from '@material-ui/core/Snackbar';
 
 import Restaurant from './Restaurant/Restaurant';
-// import {Restaurants} from '../../../backend/GetAllRestaurants';
+import {Restaurants} from '../../../backend/GetAllRestaurants';
 
 import styles from './HomePage.module.css';
 
